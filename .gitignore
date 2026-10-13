@@ -10,10 +10,12 @@ logs/
 hs_err_pid*.log
 replay_pid*.log
 
-# Archivos subidos por usuarios: viven en APP_STORAGE_DIR (volumen persistente), nunca en git
-data/
-uploads/
-storage/
+# Archivos subidos por usuarios: viven en APP_STORAGE_DIR (volumen persistente), nunca en git.
+# Ancladas a la raíz (/): sin la barra, "storage/" también ignoraba el paquete de código
+# src/main/java/com/nexora/hotel/storage y el build fallaba fuera de esta máquina.
+/data/
+/uploads/
+/storage/
 
 # Secretos y configuración local
 .env

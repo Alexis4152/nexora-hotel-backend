@@ -10,7 +10,8 @@ El usuario escribe en **español**; responde en español.
 - Sin secretos en el repositorio: `.env` está en `.gitignore`; las contraseñas viven ahí.
 - Sin pagos simulados ni datos falsos en funciones de producción. Nunca decir que algo está completo si no lo está.
 - Trabajar por fases y verificar cada una (pruebas + revisión en el navegador).
-- **Hacer commit solo cuando el usuario lo pida.** Ninguno de los dos proyectos está inicializado con git todavía.
+- **Hacer commit solo cuando el usuario lo pida.** Repos: `github.com/Alexis4152/nexora-hotel-backend` y
+  `.../nexora-hotel-frontend`, rama `main` (primer push el 2026-10-13).
 - Diseño muy cuidado ("perro"); al terminar algo, dejar ambos servidores corriendo y dar usuarios para validar.
 
 ## Decisiones confirmadas
@@ -98,7 +99,6 @@ Estilo gettext: **el texto en español es la clave**.
 
 ## Pendientes y mejoras conocidas
 
-- Inicializar git y hacer el primer commit cuando el usuario lo pida.
 - `react-router` 6.x tiene 2 avisos moderados de `npm audit`; la corrección exige migrar a la v7 (cambios
   incompatibles). Mitigado con `stripHotelPrefix` endurecido.
 - El límite de solicitudes vive en memoria: desplegar **una sola instancia** del backend.
