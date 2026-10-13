@@ -128,6 +128,31 @@ class PaymentsIT extends OperationsTestSupport {
     }
 
     @Test
+    void cashHistoryCanBeFilteredByWhoWasResponsible() {
+        Setup s = setup(1);
+        var luis = createUser(s.hotel(), "RECEPTIONIST");
+        jdbc.update("UPDATE users SET first_name = 'Luis', last_name = 'Fernández_100%' WHERE id = ?", luis.getId());
+        String luisToken = token(luis.getEmail(), s.slug());
+        openCash(s, luisToken, "100.00");
+        openCash(s, receptionist(s), "200.00");
+        String url = "/api/admin/cash/sessions";
+
+        assertThat(get(url, s.token(), s.slug()).data().path("totalElements").asInt()).isEqualTo(2);
+        JsonNode byName = get(url + "?q=luis fern", s.token(), s.slug()).data();
+        assertThat(byName.path("totalElements").asInt()).as("sin distinguir mayúsculas, nombre y apellido").isEqualTo(1);
+        assertThat(byName.path("content").get(0).path("userName").asText()).startsWith("Luis");
+        assertThat(get(url + "?q=nadie", s.token(), s.slug()).data().path("totalElements").asInt()).isZero();
+        // % y _ se buscan como texto, no como comodines.
+        assertThat(get(url + "?q=%", s.token(), s.slug()).data().path("totalElements").asInt()).isEqualTo(1);
+        assertThat(get(url + "?q=_", s.token(), s.slug()).data().path("totalElements").asInt()).isEqualTo(1);
+
+        // Sin permiso para ver todas, cada quien ve solo las suyas aunque busque otro nombre.
+        JsonNode own = get(url + "?q=Prueba", luisToken, s.slug()).data();
+        assertThat(own.path("totalElements").asInt()).isEqualTo(1);
+        assertThat(own.path("content").get(0).path("userName").asText()).startsWith("Luis");
+    }
+
+    @Test
     void closingTheCashComputesTheDifferenceAndLocksIt() {
         Setup s = setup(1);
         long id = id(booking(s, FUTURE, FUTURE.plusDays(1), true));

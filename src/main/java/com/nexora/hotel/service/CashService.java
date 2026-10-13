@@ -27,6 +27,7 @@ import com.nexora.hotel.security.SecurityUtils;
 import com.nexora.hotel.tenant.TenantContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.AccessDeniedException;
@@ -144,14 +145,32 @@ public class CashService {
     // ── Consulta ───────────────────────────────────────────────────────────────────────
 
     @Transactional(readOnly = true)
-    public PageResponse<CashSessionRow> list(int page, int size) {
+    public PageResponse<CashSessionRow> list(int page, int size, String responsible) {
         AuthPrincipal actor = SecurityUtils.requirePrincipal();
         PageRequest pr = PageRequest.of(Math.max(page, 0), Math.min(Math.max(size, 1), 50));
-        var result = actor.hasPermission("CASH:VIEW_ALL") ? sessions.findAllByOrderByOpenedAtDesc(pr)
-                : sessions.findByUserIdOrderByOpenedAtDesc(actor.userId(), pr);
+        Page<CashSession> result;
+        if (!actor.hasPermission("CASH:VIEW_ALL")) {
+            // Sin permiso para ver todas, solo las propias: el filtro por responsable no aplica.
+            result = sessions.findByUserIdOrderByOpenedAtDesc(actor.userId(), pr);
+        } else if (responsible == null || responsible.isBlank()) {
+            result = sessions.findAllByOrderByOpenedAtDesc(pr);
+        } else {
+            List<Long> userIds = usersNamed(responsible);
+            result = userIds.isEmpty() ? Page.empty(pr) : sessions.findByUserIdInOrderByOpenedAtDesc(userIds, pr);
+        }
         Map<Long, String> names = userNames.of(result.getContent().stream().map(CashSession::getUserId).toList());
         return PageResponse.of(result, s -> new CashSessionRow(s.getId(), names.get(s.getUserId()), s.getStatus(),
                 s.getOpeningFloat(), s.getOpenedAt(), s.getClosedAt(), s.getExpectedCash(), s.getCountedCash(), s.getDifference()));
+    }
+
+    /** Usuarios del hotel cuyo nombre o apellido contiene el texto (sin distinguir mayúsculas; % y _ son literales). */
+    private List<Long> usersNamed(String text) {
+        String needle = text.trim().replaceAll("\\s+", " ");
+        needle = needle.substring(0, Math.min(needle.length(), 100)).replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
+        return jdbc.queryForList("""
+                SELECT id FROM users
+                WHERE hotel_id = ? AND (first_name || ' ' || last_name) ILIKE ? ESCAPE '\\'""",
+                Long.class, TenantContext.requireHotelId(), "%" + needle + "%");
     }
 
     @Transactional(readOnly = true)

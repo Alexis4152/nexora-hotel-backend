@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,8 @@ public interface CashSessionRepository extends JpaRepository<CashSession, Long> 
     Page<CashSession> findAllByOrderByOpenedAtDesc(Pageable pageable);
 
     Page<CashSession> findByUserIdOrderByOpenedAtDesc(Long userId, Pageable pageable);
+
+    Page<CashSession> findByUserIdInOrderByOpenedAtDesc(Collection<Long> userIds, Pageable pageable);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select s from CashSession s where s.id = :id")

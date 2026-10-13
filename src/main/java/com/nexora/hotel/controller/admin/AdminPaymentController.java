@@ -99,8 +99,9 @@ public class AdminPaymentController {
     @GetMapping("/cash/sessions")
     @PreAuthorize("hasAnyAuthority('CASH:OPERATE', 'CASH:VIEW_ALL')")
     public ApiResponse<PageResponse<CashSessionRow>> sessions(@RequestParam(defaultValue = "0") int page,
-                                                              @RequestParam(defaultValue = "15") int size) {
-        return ApiResponse.ok(cash.list(page, size));
+                                                              @RequestParam(defaultValue = "15") int size,
+                                                              @RequestParam(required = false) String q) {
+        return ApiResponse.ok(cash.list(page, size, q));
     }
 
     @GetMapping("/cash/sessions/{id}")
