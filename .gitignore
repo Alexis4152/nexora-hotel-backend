@@ -1,0 +1,35 @@
+# Compilación
+target/
+*.class
+*.jar
+*.war
+
+# Logs y volcados de la JVM
+*.log
+logs/
+hs_err_pid*.log
+replay_pid*.log
+
+# Archivos subidos por usuarios: viven en APP_STORAGE_DIR (volumen persistente), nunca en git
+data/
+uploads/
+storage/
+
+# Secretos y configuración local
+.env
+.env.*
+!.env.example
+application-local.properties
+application-local.yml
+
+# IDEs y sistema
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+.claude/
+.DS_Store
+Thumbs.db

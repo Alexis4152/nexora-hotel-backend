@@ -1,0 +1,750 @@
+# Traducciones al inglés de los textos del servidor (estilo gettext: el texto en español es la clave).
+# Formato: español<TAB>english. {0}, {1}… marcan valores variables. Un salto de línea se escribe \n.
+# Los textos generados en el código con "texto " + valor se registran como plantilla: "texto {0}".
+# Prueba de cobertura: I18nCoverageTest falla si un texto visible del servidor no tiene traducción.
+Recibimos tu solicitud. El hotel te responderá por correo.	We received your request. The hotel will reply by email.
+Datos actualizados	Details updated
+Reservación cancelada	Reservation cancelled
+Cliente registrado	Guest added
+Cliente actualizado	Guest updated
+Solicitud resuelta	Request resolved
+Configuración de correo guardada	Email settings saved
+Correo de prueba enviado	Test email sent
+No se pudo enviar: {0}	Couldn't send: {0}
+Plantilla guardada	Template saved
+Plantilla restaurada	Template restored
+Fotografías agregadas	Photos added
+Fotografía eliminada	Photo deleted
+Habitación creada	Room created
+Habitación actualizada	Room updated
+Estado actualizado	Status updated
+Habitación bloqueada	Room blocked
+Bloqueo liberado	Block released
+Amenidad creada	Amenity created
+Amenidad actualizada	Amenity updated
+Amenidad eliminada	Amenity deleted
+Tipo de habitación creado	Room type created
+Tipo de habitación actualizado	Room type updated
+Configuración de cobro guardada	Payment settings saved
+Credenciales del webhook generadas: cópialas en Openpay	Webhook credentials generated: copy them into Openpay
+Caja abierta	Cash desk opened
+Movimiento registrado	Movement recorded
+Caja cerrada	Cash desk closed
+Impuesto creado	Tax created
+Impuesto actualizado	Tax updated
+Impuesto eliminado	Tax deleted
+Servicio creado	Service created
+Servicio actualizado	Service updated
+Servicio desactivado	Service deactivated
+Temporada creada	Season created
+Temporada actualizada	Season updated
+Temporada eliminada	Season deleted
+Regla creada	Rule created
+Regla actualizada	Rule updated
+Regla eliminada	Rule deleted
+Reservación creada	Reservation created
+Reservación confirmada	Reservation confirmed
+Reservación actualizada	Reservation updated
+Notas guardadas	Notes saved
+Correo enviado a la cola de envío	Email queued for sending
+Rol creado	Role created
+Permisos guardados	Permissions saved
+Rol eliminado	Role deleted
+Horarios y reglas guardados	Hours and rules saved
+Datos del hotel guardados	Hotel details saved
+Apariencia guardada	Appearance saved
+Imagen actualizada	Image updated
+Imagen eliminada	Image deleted
+Políticas guardadas como nueva versión	Policies saved as a new version
+Cargo agregado	Charge added
+Cargo anulado	Charge voided
+Llegada registrada	Checked in
+Salida registrada	Checked out
+Marcada como no presentada	Marked as no-show
+Pago registrado	Payment recorded
+Enlace de pago generado	Payment link generated
+Pago verificado con la pasarela	Payment verified with the gateway
+Pago reversado	Payment reversed
+Reembolso registrado	Refund recorded
+Usuario creado	User created
+Usuario actualizado	User updated
+Usuario activado	User activated
+Usuario desactivado	User deactivated
+Contraseña temporal generada	Temporary password generated
+Permisos actualizados	Permissions updated
+Sesión cerrada	Signed out
+Si el correo está registrado, te enviamos un enlace para restablecer tu contraseña.	If the email is registered, we've sent you a link to reset your password.
+Contraseña actualizada. Ya puedes iniciar sesión.	Password updated. You can now sign in.
+Contraseña actualizada	Password updated
+Hotel creado	Hotel created
+Hotel actualizado	Hotel updated
+Si el correo puede registrarse, te enviamos un enlace para confirmar tu cuenta. Revisa tu bandeja de entrada.	If the email can be registered, we've sent you a link to confirm your account. Check your inbox.
+¡Listo! Tu correo quedó confirmado. Ya puedes iniciar sesión.	All set! Your email is confirmed. You can now sign in.
+La cantidad de huéspedes no es válida	The number of guests is not valid
+Recibimos tu solicitud	We received your request
+Si los datos coinciden con una reservación, te enviamos un enlace de acceso a tu correo.	If the details match a reservation, we've sent an access link to your email.
+La fecha de salida debe ser posterior a la de entrada	Check-out must be after check-in
+Una reservación {0} no puede pasar a {1}	A reservation that is {0} can't change to {1}
+pendiente de pago	awaiting payment
+no presentada	no-show
+en estancia	in house
+Noche	Night
+Noche · {0}	Night · {0}
+Huéspedes adicionales	Extra guests
+El descuento no puede superar el importe del hospedaje	The discount can't exceed the lodging amount
+Descuento	Discount
+Resolución inválida	Invalid resolution
+Explica la resolución	Explain the resolution
+Escribe tu nombre	Enter your first name
+Escribe tus apellidos	Enter your last name
+Escribe tu correo	Enter your email
+El correo no es válido	The email is not valid
+Código de país inválido	Invalid country code
+Teléfono inválido	Invalid phone number
+Escribe una contraseña	Enter a password
+Debes aceptar el aviso de privacidad	You must accept the privacy notice
+Solicitud no válida	Invalid request
+El celular de México debe tener exactamente 10 dígitos	Mexican mobile numbers must have exactly 10 digits
+País inválido	Invalid country
+Opción de pago inválida	Invalid payment option
+Elige el tipo de solicitud	Choose the request type
+Indica la fecha de inicio	Enter the start date
+Indica la fecha de fin	Enter the end date
+Describe el motivo	Describe the reason
+La fecha de fin debe ser posterior a la de inicio	The end date must be after the start date
+Escribe el nombre	Enter the name
+Ícono inválido	Invalid icon
+Escribe una clave	Enter a code
+Clave de 2 a 20 caracteres: letras, números, guion o guion bajo	Code of 2 to 20 characters: letters, numbers, hyphen or underscore
+Escribe el precio base	Enter the base price
+El precio debe ser mayor a 0	The price must be greater than 0
+Tipo de cama inválido	Invalid bed type
+La capacidad máxima no puede superar adultos + menores	Maximum capacity can't exceed adults + children
+La ocupación incluida no puede superar la capacidad máxima	Included occupancy can't exceed maximum capacity
+Elige el tipo de habitación	Choose the room type
+Escribe el número	Enter the number
+Número de 1 a 10 caracteres: letras, números o guion	Number of 1 to 10 characters: letters, numbers or hyphen
+Piso inválido	Invalid floor
+Número de identificación inválido	Invalid ID number
+Indica el fondo inicial	Enter the starting float
+Solo se registran retiros o depósitos de efectivo	Only cash withdrawals or deposits can be recorded
+Indica el efectivo contado	Enter the cash counted
+ID de comercio inválido	Invalid merchant ID
+La llave privada de Openpay empieza con sk_	The Openpay private key starts with sk_
+La llave pública de Openpay empieza con pk_	The Openpay public key starts with pk_
+Elige el método de pago	Choose the payment method
+Indica el importe	Enter the amount
+El importe debe ser mayor a cero	The amount must be greater than zero
+Escribe solo los últimos 4 dígitos	Enter only the last 4 digits
+Los cobros en línea se hacen con un enlace de pago	Online payments are made with a payment link
+Elige cómo se devuelve	Choose the refund method
+Indica el motivo	Enter the reason
+Indica el motivo del reverso	Enter the reason for the reversal
+Describe el cargo	Describe the charge
+Escribe el precio	Enter the price
+La salida debe ser posterior a la entrada (máximo 60 noches)	Check-out must be after check-in (maximum 60 nights)
+Indica el inicio	Enter the start
+Indica el fin	Enter the end
+La fecha de fin no puede ser anterior al inicio	The end date can't be before the start
+Escribe el valor	Enter the value
+Las reglas por fecha o festivo requieren un rango válido	Date or holiday rules require a valid range
+Las reglas de temporada requieren elegir la temporada	Season rules require choosing the season
+Las reglas de fin de semana requieren al menos un día	Weekend rules require at least one day
+El valor no es válido para el tipo de ajuste	The value isn't valid for the adjustment type
+Elige un cliente o captura los datos del huésped	Choose a guest or enter the guest's details
+Indica el motivo del cambio	Enter the reason for the change
+Debes aceptar las políticas del hotel	You must accept the hotel's policies
+El correo es obligatorio para enviarte la confirmación	Email is required to send you the confirmation
+Folio inválido	Invalid reservation number
+Servidor inválido	Invalid server
+Escribe los apellidos	Enter the last name
+Indica la entrada	Enter the check-in date
+Indica la salida	Enter the check-out date
+Un porcentaje de penalización no puede superar 100	A penalty percentage can't exceed 100
+Debe ser una dirección https:// válida	Must be a valid https:// address
+Las noches máximas deben ser mayores o iguales a las mínimas	Maximum nights must be greater than or equal to the minimum
+Escribe el nombre comercial	Enter the trade name
+Modo inválido	Invalid mode
+Escribe tu contraseña actual	Enter your current password
+Escribe la nueva contraseña	Enter the new password
+Escribe el nombre del hotel	Enter the hotel name
+Escribe el identificador del enlace	Enter the link identifier
+Solo minúsculas, números y guiones (3 a 60)	Lowercase letters, numbers and hyphens only (3 to 60)
+Escribe el nombre del administrador	Enter the administrator's first name
+Escribe los apellidos del administrador	Enter the administrator's last name
+Escribe el correo del administrador	Enter the administrator's email
+Escribe el correo	Enter the email
+Asigna al menos un rol	Assign at least one role
+Escribe tu contraseña	Enter your password
+Escribe el nombre del rol	Enter the role name
+Otra persona modificó este registro mientras lo editabas. Recarga e intenta de nuevo.	Someone else changed this record while you were editing it. Reload and try again.
+Revisa los campos marcados	Check the highlighted fields
+La solicitud no es válida	The request is not valid
+Recurso no encontrado	Resource not found
+Otra operación estaba modificando lo mismo en este momento. Intenta de nuevo.	Another operation was changing the same thing at this moment. Try again.
+No hay servidor de correo configurado	No mail server is configured
+Pagar ahora	Pay now
+Confirmar mi cuenta	Confirm my account
+Reservación modificada	Reservation changed
+Enlace de acceso	Access link
+Enlace de pago	Payment link
+Pago recibido	Payment received
+Reembolso emitido	Refund issued
+Estancia finalizada	Stay completed
+Confirmación de cuenta	Account confirmation
+Solicitud de datos personales	Personal data request
+Debes cambiar tu contraseña temporal antes de continuar	You must change your temporary password before continuing
+Demasiadas solicitudes. Intenta de nuevo en unos minutos.	Too many requests. Try again in a few minutes.
+No tienes permiso para realizar esta acción	You don't have permission to perform this action
+No autenticado	Not authenticated
+Sin sesión	No session
+Debe haber al menos un adulto	There must be at least one adult
+La cantidad de menores no es válida	The number of children is not valid
+No se puede reservar en fechas pasadas	You can't book past dates
+La estancia no puede superar 365 noches	The stay can't exceed 365 nights
+No se aceptan reservaciones en línea para el mismo día. Llámanos y con gusto te ayudamos.	Same-day online reservations aren't accepted. Call us and we'll gladly help.
+Reserva con al menos {0} horas de anticipación	Book at least {0} hours in advance
+Solo se puede reservar con hasta {0} días de anticipación	You can only book up to {0} days in advance
+La estancia debe ser de {0} a {1} noches	The stay must be {0} to {1} nights
+Hay una diferencia de {0}: explica el motivo para cerrar	There's a difference of {0}: explain the reason to close
+Caja no encontrada	Cash desk not found
+No puedes ver la caja de otro usuario	You can't view another user's cash desk
+Abre tu caja para {0}	Open your cash desk to {0}
+La caja ya está cerrada	The cash desk is already closed
+La caja ya está cerrada: sus movimientos no se pueden modificar	The cash desk is already closed: its movements can't be changed
+Solo el responsable puede operar esta caja	Only the person responsible can operate this cash desk
+Ya tienes una caja abierta: ciérrala antes de abrir otra	You already have an open cash desk: close it before opening another
+No puedes retirar más efectivo del que hay en la caja	You can't withdraw more cash than is in the cash desk
+Revisa los correos de {0} (sepáralos con coma)	Check the emails for {0} (separate them with commas)
+Para activar el correo indica el servidor y el correo remitente	To enable email, enter the server and the sender email
+destinatarios de avisos	notice recipients
+Activa y guarda la configuración de correo antes de probarla	Enable and save the email settings before testing them
+El enlace no es válido o ya venció. Pide uno nuevo desde "Iniciar sesión".	The link is invalid or has expired. Request a new one from "Sign in".
+La cuenta ya no existe	The account no longer exists
+Ese correo ya está ligado a otra cuenta. Contacta al hotel.	That email is already linked to another account. Contact the hotel.
+rectificación	correction
+eliminación	deletion
+oposición al uso	objection to use
+El color principal es muy claro: el texto blanco de los botones no se leería	The primary color is too light: white button text wouldn't be readable
+El color del menú lateral es muy claro: el texto no tendría contraste suficiente	The sidebar color is too light: the text wouldn't have enough contrast
+Bloqueada por intentos fallidos	Locked due to failed attempts
+Contraseña incorrecta	Incorrect password
+Tu sesión expiró. Inicia sesión de nuevo.	Your session expired. Sign in again.
+El enlace no es válido o ya expiró. Solicita uno nuevo.	The link is invalid or has expired. Request a new one.
+La contraseña actual no es correcta	The current password is incorrect
+La nueva contraseña debe ser distinta de la actual	The new password must be different from the current one
+Cuenta inexistente	Account doesn't exist
+Cuenta bloqueada temporalmente	Account temporarily locked
+Cuenta u hotel inactivo	Account or hotel inactive
+Correo sin verificar	Email not verified
+Confirma tu correo para iniciar sesión. Revisa tu bandeja de entrada o pide un nuevo enlace.	Confirm your email to sign in. Check your inbox or request a new link.
+Ya existe un hotel con el enlace /h/{0}	A hotel with the link /h/{0} already exists
+Administrador	Administrator
+Acceso completo al hotel	Full access to the hotel
+Recepcionista	Receptionist
+Operación diaria de recepción	Daily front desk operations
+Huésped	Guest
+Huésped con cuenta en el portal	Guest with a website account
+Hotel no encontrado	Hotel not found
+El hotel no tiene administradores	The hotel has no administrators
+Contraseña temporal generada por la plataforma	Temporary password generated by the platform
+La zona horaria no es válida	The time zone is not valid
+Los roles del sistema no se pueden eliminar	System roles can't be deleted
+Hay usuarios con este rol. Reasígnalos antes de eliminarlo.	There are users with this role. Reassign them before deleting it.
+Rol no encontrado	Role not found
+El rol Administrador siempre tiene todos los permisos y no se puede editar	The Administrator role always has every permission and can't be edited
+Hay permisos desconocidos en la solicitud	The request contains unknown permissions
+El permiso '{0}' está reservado al administrador	The permission '{0}' is reserved for the administrator
+No puedes otorgar un permiso que no tienes: {0}	You can't grant a permission you don't have: {0}
+Ese nombre corresponde a un rol del sistema	That name belongs to a system role
+Ya existe un usuario con ese correo en este hotel	A user with that email already exists in this hotel
+No puedes cambiar tus propios roles	You can't change your own roles
+Solo un administrador puede quitar el rol de administrador	Only an administrator can remove the administrator role
+No puedes desactivar tu propia cuenta	You can't deactivate your own account
+Solo un administrador puede activar o desactivar a otro administrador	Only an administrator can activate or deactivate another administrator
+Para cambiar tu contraseña usa la opción de tu perfil	To change your password, use the option in your profile
+Solo un administrador puede restablecer la contraseña de otro administrador	Only an administrator can reset another administrator's password
+No puedes modificar tus propios permisos	You can't change your own permissions
+Los administradores siempre tienen todos los permisos; no admiten ajustes	Administrators always have every permission; they can't be adjusted
+Permiso desconocido: {0}	Unknown permission: {0}
+El permiso {0} está reservado al administrador	The permission {0} is reserved for the administrator
+No puedes otorgar ni retirar un permiso que no tienes: {0}	You can't grant or remove a permission you don't have: {0}
+Alguno de los roles no existe	One of the roles doesn't exist
+El rol {0} no se puede asignar al personal	The role {0} can't be assigned to staff
+Solo un administrador puede asignar el rol de administrador	Only an administrator can assign the administrator role
+No puedes asignar el rol {0} porque otorga permisos que tú no tienes	You can't assign the role {0} because it grants permissions you don't have
+Es el último administrador activo del hotel. Asigna otro administrador primero.	This is the hotel's last active administrator. Assign another administrator first.
+Usuario no encontrado	User not found
+Solicitud no permitida	Request not allowed
+La habitación ya no está disponible para esas fechas	The room is no longer available for those dates
+Ya existe un registro con esos datos	A record with those details already exists
+El registro está relacionado con otros datos y no se puede completar la operación	The record is linked to other data and the operation can't be completed
+Alguno de los datos no es válido	Some of the data is not valid
+No se pudo guardar la información	The information couldn't be saved
+Correo o contraseña incorrectos. Tras varios intentos fallidos la cuenta se bloquea unos minutos.	Incorrect email or password. After several failed attempts the account is locked for a few minutes.
+Método no permitido	Method not allowed
+El archivo es demasiado grande	The file is too large
+Ese registro ya está cerrado y no se puede modificar. Las correcciones se hacen con un movimiento nuevo.	That record is already closed and can't be changed. Corrections are made with a new movement.
+Ocurrió un error inesperado. Intenta de nuevo más tarde.	An unexpected error occurred. Please try again later.
+Ver mi reservación	View my reservation
+No hubo respuesta de Openpay. Intenta de nuevo en unos minutos.	Openpay didn't respond. Try again in a few minutes.
+Se interrumpió la comunicación con Openpay	Communication with Openpay was interrupted
+La solicitud enviada a Openpay no es válida	The request sent to Openpay is not valid
+Openpay rechazó las credenciales: revisa el ID de comercio y la llave privada	Openpay rejected the credentials: check the merchant ID and private key
+Openpay no está disponible en este momento	Openpay is not available right now
+El cargo no existe en Openpay	The charge doesn't exist in Openpay
+Ya existe un cargo con ese número de orden	A charge with that order number already exists
+La operación excede el límite permitido	The operation exceeds the allowed limit
+La tarjeta fue declinada	The card was declined
+La tarjeta está vencida	The card has expired
+La tarjeta no tiene fondos suficientes	The card has insufficient funds
+La tarjeta fue reportada como robada	The card was reported stolen
+La tarjeta fue rechazada por el sistema antifraude	The card was rejected by the anti-fraud system
+La tarjeta no admite este tipo de transacción	The card doesn't support this type of transaction
+Openpay rechazó las credenciales	Openpay rejected the credentials
+Openpay no aceptó la operación	Openpay didn't accept the operation
+El ID de comercio de Openpay no es válido	The Openpay merchant ID is not valid
+Cliente no encontrado	Guest not found
+Ya existe un cliente con ese correo	A guest with that email already exists
+Cuenta	Account
+Solicitud no encontrada	Request not found
+La solicitud ya fue resuelta	The request has already been resolved
+Solo una solicitud de eliminación puede anonimizar los datos	Only a deletion request can anonymize the data
+El huésped tiene reservaciones activas: cancélalas o espera a que terminen antes de anonimizar	The guest has active reservations: cancel them or wait for them to finish before anonymizing
+Cliente	Guest
+El hotel no tiene rol de huésped	The hotel has no guest role
+Ya tienes una solicitud de ese tipo en trámite	You already have a request of that type in progress
+Cuenta no encontrada	Account not found
+Tu cuenta no tiene un perfil de huésped en este hotel	Your account has no guest profile at this hotel
+Reservación no encontrada	Reservation not found
+El hotel no tiene políticas iniciales	The hotel has no initial policies
+Saldo a favor del huésped: procede reembolso	Guest credit balance: refund due
+Saldo por cobrar después de la salida	Balance receivable after check-out
+Pago en línea sin confirmar por la pasarela	Online payment not confirmed by the gateway
+Elige un rango de fechas de hasta un año	Choose a date range of up to one year
+Llave de idempotencia inválida	Invalid idempotency key
+Esta operación ya se registró con otros datos	This operation was already recorded with different data
+La reservación expiró: no admite cobros	The reservation expired: it can't take payments
+La reservación no tiene saldo pendiente	The reservation has no balance due
+El importe excede el saldo pendiente de {0}	The amount exceeds the balance due of {0}
+Escribe la referencia o clave de rastreo de la transferencia	Enter the transfer reference or tracking key
+Escribe el número de autorización del voucher o los últimos 4 dígitos	Enter the voucher authorization number or the last 4 digits
+cobrar en efectivo	take cash payments
+El anticipo ya está cubierto	The deposit is already covered
+No hay saldo pendiente	There's no balance due
+El pago en línea no está activo en este hotel	Online payment isn't enabled at this hotel
+Esta reservación ya no admite pagos en línea	This reservation no longer accepts online payments
+El importe excede el saldo pendiente de {0}{1}	The amount exceeds the balance due of {0}{1}
+Reservación {0} · {1}	Reservation {0} · {1}
+No se pudo iniciar el pago en línea: {0}	The online payment couldn't be started: {0}
+La pasarela no devolvió la página de pago	The gateway didn't return the payment page
+La pasarela no devolvió la página de pago. Intenta de nuevo.	The gateway didn't return the payment page. Try again.
+No se generó la página de pago	The payment page wasn't generated
+La pasarela reportó una orden o un importe distintos: revisa el cargo {0}	The gateway reported a different order or amount: check charge {0}
+Pago {0}: orden o importe no coinciden con la pasarela	Payment {0}: order or amount don't match the gateway
+El pago no se completó	The payment wasn't completed
+El enlace venció sin completarse el pago	The link expired before the payment was completed
+Pago {0}: {1}	Payment {0}: {1}
+Reembolso hecho desde el panel de la pasarela	Refund made from the gateway dashboard
+Pago no encontrado	Payment not found
+No se pudo consultar la pasarela en este momento. Intenta de nuevo.	The gateway couldn't be reached right now. Try again.
+Escribe la referencia de la transferencia del reembolso	Enter the refund transfer reference
+No hay suficiente efectivo en tu caja para este reembolso	There's not enough cash in your cash desk for this refund
+Elige el pago en línea que se va a reembolsar	Choose the online payment to refund
+Reembolso {0}	Refund {0}
+La pasarela no aplicó el reembolso: {0}	The gateway didn't apply the refund: {0}
+No puedes reembolsar más de lo cobrado ({0})	You can't refund more than was collected ({0})
+Según la política solo procede reembolsar {0}. Más requiere autorización.	Per the policy only {0} can be refunded. More requires authorization.
+Esta reservación no tiene saldo a favor: el reembolso requiere autorización	This reservation has no credit balance: the refund requires authorization
+El pago a reembolsar no es válido	The payment to refund is not valid
+Ese pago no se hizo en línea	That payment wasn't made online
+De ese pago solo quedan {0} por reembolsar	Only {0} of that payment is left to refund
+Solo se reversan pagos completados	Only completed payments can be reversed
+Un pago en línea se corrige con un reembolso por la pasarela	An online payment is corrected with a refund through the gateway
+Este pago ya tiene reembolsos o reversos registrados	This payment already has refunds or reversals recorded
+reversar un cobro en efectivo	reverse a cash payment
+No hay suficiente efectivo en tu caja para reversar este cobro	There's not enough cash in your cash desk to reverse this payment
+Los cargos se registran en reservaciones confirmadas o en estancia	Charges are recorded on confirmed or in-house reservations
+El servicio no está disponible	The service is not available
+Cargo no encontrado	Charge not found
+El cargo ya estaba anulado	The charge was already voided
+La operación dejaría el cobro neto en negativo	The operation would make the net amount collected negative
+El método {0} no está habilitado en este hotel	The {0} method isn't enabled at this hotel
+Efectivo	Cash
+Tarjeta	Card
+Transferencia	Bank transfer
+Pago en línea	Online payment
+Conexión correcta con Openpay (modo pruebas)	Connected to Openpay successfully (test mode)
+Conexión correcta con Openpay (producción)	Connected to Openpay successfully (production)
+El pago en línea no está configurado en este hotel	Online payment isn't configured at this hotel
+Para activar el pago en línea captura el ID de comercio y la llave privada de Openpay	To enable online payment, enter the Openpay merchant ID and private key
+Deja al menos un método de pago activo	Keep at least one payment method enabled
+Para cobrar en producción la API debe publicarse con https://	To charge in production, the API must be published over https://
+Ya existe una cuenta de plataforma con ese correo	A platform account with that email already exists
+Regla no encontrada	Rule not found
+El tipo de habitación no existe	The room type doesn't exist
+La temporada no existe	The season doesn't exist
+Impuesto no encontrado	Tax not found
+Ya existe un servicio con ese nombre	A service with that name already exists
+Servicio no encontrado	Service not found
+Tipo de habitación no encontrado	Room type not found
+Los huéspedes superan la capacidad de {0} (máximo {1})	The guests exceed the capacity of {0} (maximum {1})
+Temporada no encontrada	Season not found
+Hay reglas de tarifa que usan esta temporada. Elimínalas o cámbialas primero.	There are rate rules using this season. Delete or change them first.
+El rango del calendario debe ser de 1 a 62 días	The calendar range must be 1 to 62 days
+No tienes permiso para confirmar reservaciones	You don't have permission to confirm reservations
+No tienes permiso para aplicar descuentos	You don't have permission to apply discounts
+El cliente está bloqueado para nuevas reservaciones	The guest is blocked from new reservations
+No es posible completar la reservación en línea. Contáctanos por teléfono.	The reservation can't be completed online. Please contact us by phone.
+El tipo de habitación no está disponible	The room type is not available
+Ya pasó la hora de llegada: solo un administrador puede cancelar esta reservación	The check-in time has passed: only an administrator can cancel this reservation
+No tienes permiso para condonar la penalización	You don't have permission to waive the penalty
+Solo se pueden modificar reservaciones pendientes o confirmadas	Only pending or confirmed reservations can be changed
+No tienes permiso para cambiar el descuento	You don't have permission to change the discount
+La reservación no tiene correo de contacto	The reservation has no contact email
+La solicitud no se confirmó dentro del plazo	The request wasn't confirmed in time
+Esta reservación ya no se puede cancelar en línea	This reservation can no longer be cancelled online
+Ya pasó la hora de llegada. Comunícate con el hotel para cancelar.	The check-in time has passed. Contact the hotel to cancel.
+Esta cancelación tiene una penalización de {0}. Confírmala para continuar.	This cancellation has a penalty of {0}. Confirm it to continue.
+La habitación elegida no está disponible o no es del tipo seleccionado	The chosen room isn't available or isn't of the selected type
+La habitación {0} ya está ocupada en esas fechas	Room {0} is already occupied on those dates
+Ya no hay habitaciones {0} disponibles para esas fechas	There are no {0} rooms left for those dates
+Alguno de los servicios ya no está disponible	One of the services is no longer available
+{0} admite hasta {1} huéspedes ({2} adultos, {3} menores)	{0} allows up to {1} guests ({2} adults, {3} children)
+Amenidad no encontrada	Amenity not found
+Ya existe un tipo de habitación con la clave {0}	A room type with the code {0} already exists
+Hay habitaciones activas de este tipo. Desactívalas o cámbialas de tipo primero.	There are active rooms of this type. Deactivate them or change their type first.
+Alguna amenidad no existe	One of the amenities doesn't exist
+Ya existe la habitación {0}	Room {0} already exists
+La habitación tiene reservaciones vigentes o futuras. Reubícalas antes de desactivarla.	The room has current or future reservations. Move them before deactivating it.
+Activa primero el tipo de habitación {0}	Activate the room type {0} first
+El estado Ocupada se asigna automáticamente al registrar el check-in	The Occupied status is set automatically at check-in
+Una habitación ocupada solo puede pasar a limpieza tras el check-out	An occupied room can only go to housekeeping after check-out
+No tienes permiso para este cambio de estado	You don't have permission for this status change
+Habitación no encontrada	Room not found
+La habitación está desactivada	The room is deactivated
+No se pueden bloquear fechas pasadas	Past dates can't be blocked
+La habitación ya tiene una reservación o un bloqueo en esas fechas	The room already has a reservation or a block on those dates
+Bloqueo no encontrado	Block not found
+El bloqueo ya fue liberado	The block was already released
+Selecciona al menos una imagen	Select at least one image
+Máximo {0} fotografías por {1}	Maximum {0} photos per {1}
+El orden enviado no coincide con las fotografías actuales	The order sent doesn't match the current photos
+Fotografía no encontrada	Photo not found
+El tipo de habitación está desactivado	The room type is deactivated
+Propietario inválido	Invalid owner
+Ya existe una amenidad con ese nombre	An amenity with that name already exists
+La llegada es el {0}: aún no se puede registrar	Check-in is on {0}: it can't be recorded yet
+La fecha de salida ya pasó: no se puede registrar la llegada	The check-out date has passed: check-in can't be recorded
+Confirma que verificaste la identificación del huésped	Confirm that you verified the guest's ID
+Hay un saldo pendiente de {0}: cóbralo o confirma que se liquidará a la salida	There's a balance due of {0}: collect it or confirm it will be settled at check-out
+La habitación {0} no está activa o no admite a estos huéspedes	Room {0} isn't active or doesn't fit these guests
+La habitación {0} está ocupada en esas fechas	Room {0} is occupied on those dates
+La habitación {0} está {1}	Room {0} is {1}
+Solo un supervisor puede asignar una habitación que sigue en limpieza	Only a supervisor can assign a room that's still being cleaned
+Saldo pendiente de {0}: cóbralo antes de registrar la salida	Balance due of {0}: collect it before checking out
+Solo un supervisor puede autorizar una salida con saldo pendiente	Only a supervisor can authorize a check-out with a balance due
+Indica el motivo para autorizar la salida con saldo pendiente	Enter the reason to authorize check-out with a balance due
+Se puede marcar como no presentada a partir del día siguiente a la llegada	It can be marked as a no-show starting the day after check-in
+en limpieza	being cleaned
+en mantenimiento	under maintenance
+fuera de servicio	out of service
+Confirma la reservación antes de registrar la llegada	Confirm the reservation before checking in
+La reservación espera su anticipo: cóbralo o confírmala antes de la llegada	The reservation is awaiting its deposit: collect it or confirm it before check-in
+La llegada ya se registró	Check-in has already been recorded
+La reservación está {0}	The reservation is {0}
+La llegada es el {0}	Check-in is on {0}
+La fecha de salida ya pasó	The check-out date has passed
+Llega con {0} día(s) de retraso: las noches no usadas se cobran según la reservación	Arriving {0} day(s) late: unused nights are charged per the reservation
+Saldo pendiente de {0}	Balance due of {0}
+La habitación {0} está {1}: elige otra o confirma que ya está lista	Room {0} is {1}: choose another or confirm it's ready
+La imagen debe ser JPG, PNG o WEBP	The image must be JPG, PNG or WEBP
+La imagen está dañada o no se puede leer	The image is damaged or can't be read
+La imagen no debe medir más de {0} px por lado	The image must not exceed {0} px per side
+Selecciona una imagen	Select an image
+La imagen no debe pesar más de {0} MB	The image must not be larger than {0} MB
+Carpeta inválida	Invalid folder
+No se pudo leer la imagen	The image couldn't be read
+No se pudo guardar la imagen. Intenta de nuevo.	The image couldn't be saved. Try again.
+No se identificó el hotel. Entra desde el enlace de tu hotel.	The hotel couldn't be identified. Open it from your hotel's link.
+Hotel no encontrado o inactivo	Hotel not found or inactive
+El color debe tener el formato #RRGGBB	The color must use the #RRGGBB format
+El teléfono debe tener exactamente 10 dígitos	The phone must have exactly 10 digits
+El código postal debe tener 5 dígitos	The ZIP code must have 5 digits
+Solo se permiten letras, espacios, apóstrofos, guiones y puntos	Only letters, spaces, apostrophes, hyphens and periods are allowed
+La contraseña debe tener entre 10 y 72 caracteres, con mayúscula, minúscula y número	The password must have 10 to 72 characters, with uppercase, lowercase and a number
+Pendiente	Pending
+Esperando pago	Awaiting payment
+Confirmada	Confirmed
+En estancia	In house
+Finalizada	Checked out
+Cancelada	Cancelled
+No se presentó	No-show
+Expirada	Expired
+Sitio web	Website
+Recepción	Front desk
+Teléfono	Phone
+Correo	Email
+Otro	Other
+Tarjeta (terminal)	Card (terminal)
+En línea	Online
+Pago	Payment
+Reembolso	Refund
+Reverso	Reversal
+Completado	Completed
+Fallido	Failed
+Cancelado	Cancelled
+Cobro	Payment
+Retiro	Withdrawal
+Depósito	Deposit
+Ingreso	In
+Egreso	Out
+Lunes	Monday
+Martes	Tuesday
+Miércoles	Wednesday
+Jueves	Thursday
+Viernes	Friday
+Sábado	Saturday
+Domingo	Sunday
+Reservaciones	Reservations
+Reservaciones por fecha de creación o de llegada, por canal y estado.	Reservations by creation or check-in date, by channel and status.
+Operación	Operations
+Ocupación	Occupancy
+Habitaciones vendidas contra disponibles, noche por noche.	Rooms sold versus available, night by night.
+Habitaciones más reservadas	Most booked rooms
+Noches vendidas y ocupación de cada habitación.	Nights sold and occupancy for each room.
+Cancelaciones	Cancellations
+Cancelaciones y no presentados, con su motivo y penalización.	Cancellations and no-shows, with their reason and penalty.
+Clientes recurrentes	Returning guests
+Huéspedes con dos o más estancias que llegaron en el periodo.	Guests with two or more stays who arrived in the period.
+Reservaciones pendientes	Pending reservations
+Solicitudes sin confirmar en este momento.	Requests not yet confirmed right now.
+Ingresos por periodo	Revenue by period
+Cobrado contra devengado, día por día, con anticipos.	Collected versus earned, day by day, with deposits.
+Finanzas	Finance
+Pagos por método	Payments by method
+Pagos, reembolsos y reversos con su método y estado.	Payments, refunds and reversals with their method and status.
+Reembolsos	Refunds
+Devoluciones y reversos registrados.	Recorded refunds and reversals.
+Cuentas por cobrar	Accounts receivable
+Saldos pendientes y saldos a favor de cada reservación.	Balances due and credit balances for each reservation.
+Movimientos de caja	Cash desk movements
+Entradas y salidas registradas en las cajas de recepción.	Money in and out recorded at the front desk cash desks.
+Reporte no encontrado	Report not found
+La fecha final no puede ser anterior a la inicial	The end date can't be before the start date
+El periodo no puede exceder {0} días	The period can't exceed {0} days
+Filtro no válido: {0}	Invalid filter: {0}
+Con llegada en el periodo	With check-in in the period
+Creadas en el periodo	Created in the period
+Vigentes o realizadas	Active or completed
+Confirmadas, en estancia y finalizadas	Confirmed, in house and checked out
+Pendientes	Pending
+Sin confirmar todavía	Not confirmed yet
+Canceladas / no show	Cancelled / no-show
+Noches reservadas	Nights booked
+De reservaciones vigentes o realizadas	From active or completed reservations
+Anticipación promedio	Average lead time
+Días entre la reservación y la llegada	Days between booking and check-in
+Importe reservado	Booked value
+Valor de las reservaciones vigentes o realizadas. No es dinero cobrado	Value of active or completed reservations. Not money collected
+Llegadas por día	Check-ins per day
+Reservaciones creadas por día	Reservations created per day
+Folio	Reservation no.
+Creada	Created
+Llegada	Check-in
+Salida	Check-out
+Noches	Nights
+Huéspedes	Guests
+Titular	Main guest
+Habitación	Room
+Canal	Channel
+Estado	Status
+Total	Total
+Pagado	Paid
+Por fecha de llegada	By check-in date
+Por fecha de creación	By creation date
+Por canal	By channel
+Por estado	By status
+Ocupación promedio	Average occupancy
+Noches vendidas ÷ noches disponibles	Nights sold ÷ nights available
+Noches vendidas	Nights sold
+Habitación-noche con reservación confirmada, en estancia o finalizada	Room-nights with a confirmed, in-house or checked-out reservation
+Noches disponibles	Nights available
+Habitaciones activas menos bloqueos por mantenimiento	Active rooms minus maintenance blocks
+Noche de mayor ocupación	Peak occupancy night
+Ocupación por noche	Occupancy per night
+Por noche de estancia	By night of stay
+Día	Day
+Habitaciones	Rooms
+Bloqueadas	Blocked
+Disponibles	Available
+Vendidas	Sold
+Libres	Free
+Las habitaciones se cuentan según su estado actual (activas). Un bloqueo de mantenimiento resta esa noche.	Rooms are counted by their current status (active). A maintenance block subtracts that night.
+Más reservada	Most booked
+Hab. {0}	Room {0}
+Tipo más vendido	Best-selling type
+Dentro del periodo	Within the period
+Ocupación del inventario	Inventory occupancy
+Noches vendidas dentro del periodo	Nights sold within the period
+Noches vendidas por tipo	Nights sold by type
+Tipo	Type
+Por fecha de cancelación	By cancellation date
+No se presentaron	No-shows
+Por fecha en que se marcó	By date marked
+Tasa de cancelación	Cancellation rate
+Cancelaciones ÷ reservaciones creadas en el mismo periodo	Cancellations ÷ reservations created in the same period
+Días entre la cancelación y la llegada	Days between cancellation and check-in
+Noches liberadas	Nights released
+Penalizaciones aplicadas	Penalties applied
+Según la política aceptada. Lo efectivamente cobrado aparece en Pagos	Per the accepted policy. What was actually collected appears in Payments
+Fecha	Date
+Días de anticipación	Days of notice
+Motivo	Reason
+Importe de la reservación	Reservation amount
+Penalización	Penalty
+Cancelaciones por día	Cancellations per day
+Canceladas	Cancelled
+No show	No-show
+Las reservaciones que expiraron sin pago no se cuentan como cancelaciones.	Reservations that expired unpaid aren't counted as cancellations.
+Dos o más estancias, con llegada en el periodo	Two or more stays, with check-in in the period
+Del total de huéspedes	Of all guests
+Recurrentes ÷ clientes con llegada en el periodo	Returning ÷ guests with check-in in the period
+Estancias promedio	Average stays
+Historial completo de cada cliente	Each guest's full history
+Valor de sus estancias	Value of their stays
+Total de estancias y cargos (historial completo). No es lo cobrado	Total of stays and charges (full history). Not what was collected
+País	Country
+Estancias	Stays
+Primera llegada	First check-in
+Última llegada	Last check-in
+Valor de estancias	Value of stays
+Clientes con llegada en el periodo	Guests with check-in in the period
+Se cuentan estancias confirmadas, en curso o finalizadas. Los clientes anonimizados no aparecen.	Confirmed, current or completed stays are counted. Anonymized guests aren't shown.
+Solicitudes y reservaciones esperando pago	Requests and reservations awaiting payment
+Llegan en 7 días o menos	Arriving in 7 days or less
+Conviene confirmarlas o contactar al huésped	Consider confirming them or contacting the guest
+Expiran en 24 h	Expire within 24 h
+Se liberan automáticamente si no se pagan	Released automatically if unpaid
+Importe en espera	Amount pending
+Valor de estas reservaciones. Aún no es venta	Value of these reservations. Not a sale yet
+Expira	Expires
+Anticipo requerido	Required deposit
+Situación actual (no depende del periodo)	Current situation (doesn't depend on the period)
+Cobrado neto	Net collected
+Pagos completados menos reembolsos y reversos	Completed payments minus refunds and reversals
+Anticipos recibidos	Deposits received
+Parte de lo cobrado que se pagó antes de la llegada	Part of what was collected that was paid before check-in
+Devengado	Earned
+Noches ocupadas en el periodo + cargos extra + penalizaciones. No es dinero cobrado	Nights occupied in the period + extra charges + penalties. Not money collected
+Hospedaje devengado	Lodging earned
+Total de cada estancia repartido entre sus noches (incluye impuestos)	Each stay's total spread across its nights (includes taxes)
+Cargos extra	Extra charges
+Consumos y servicios cargados a la cuenta (sin anulados)	Consumption and services charged to the account (excluding voided)
+Por cobrar hoy	Receivable today
+Saldo pendiente de cuentas comprometidas, a la fecha de hoy	Balance due on committed accounts, as of today
+Cobrado contra devengado	Collected versus earned
+Cobrado por fecha de pago · devengado por noche de estancia	Collected by payment date · earned by night of stay
+De ello, anticipos	Of which, deposits
+Penalizaciones	Penalties
+Total devengado	Total earned
+Cobrado y devengado son conceptos distintos y no deben sumarse entre sí.	Collected and earned are different concepts and must not be added together.
+Un anticipo cobrado hoy se devenga en las noches de la estancia.	A deposit collected today is earned over the nights of the stay.
+Pagos recibidos{0}	Payments received{0}
+Entradas de dinero completadas	Completed money received
+Reembolsos{0}	Refunds{0}
+Devoluciones al huésped	Money returned to guests
+Reversos{0}	Reversals{0}
+Correcciones de pagos registrados por error	Corrections of payments recorded by mistake
+Neto{0}	Net{0}
+Recibido menos devoluciones y reversos	Received minus refunds and reversals
+Operaciones	Operations
+Devoluciones por método	Refunds by method
+Neto por método	Net by method
+Importe	Amount
+Devoluciones por día	Refunds per day
+Neto por día	Net per day
+Por fecha en que se completó el movimiento	By date the movement was completed
+Método	Method
+Referencia	Reference
+Registró	Recorded by
+Los reembolsos y reversos aparecen con signo negativo.	Refunds and reversals appear as negative amounts.
+Saldo a favor	Credit balance
+Vencido	Overdue
+Por cobrar	Receivable
+Lo adeudado menos lo pagado, en cuentas comprometidas	Amount owed minus amount paid, on committed accounts
+Huéspedes que ya salieron o reservaciones canceladas con saldo	Guests who already checked out or cancelled reservations with a balance
+Cuentas con saldo	Accounts with a balance
+Saldos a favor	Credit balances
+Pagos por encima de lo adeudado: posible reembolso	Payments above the amount owed: possible refund
+Adeudado	Owed
+Saldo	Balance
+Situación	Situation
+Las reservaciones pendientes de confirmar no se incluyen: su importe aún no es una deuda.	Reservations awaiting confirmation aren't included: their amount isn't a debt yet.
+Entradas de efectivo	Cash in
+Cobros y depósitos en efectivo	Cash payments and deposits
+Salidas de efectivo	Cash out
+Reembolsos, reversos y retiros en efectivo	Cash refunds, reversals and withdrawals
+Neto cobrado en terminal	Net collected on terminal
+Transferencias	Bank transfers
+Neto registrado en caja	Net recorded at the cash desk
+Cortes cerrados	Closed counts
+Cajas cerradas en el periodo	Cash desks closed in the period
+Diferencias en cortes	Count differences
+Contado menos esperado. Negativo = faltante	Counted minus expected. Negative = shortage
+Entradas y salidas por método	In and out by method
+Entradas	In
+Salidas	Out
+Por fecha del movimiento	By movement date
+Caja	Cash desk
+Usuario	User
+Sentido	Direction
+Los pagos en línea no pasan por caja: consúltalos en Pagos por método.	Online payments don't go through the cash desk: see them in Payments by method.
+El periodo tiene demasiados registros: acórtalo para ver el detalle completo.	The period has too many records: shorten it to see the full details.
+Resumen	Summary
+Periodo: {0} a {1} · {2}	Period: {0} to {1} · {2}
+Moneda: {0}	Currency: {0}
+Indicador	Metric
+Valor	Value
+Qué representa	What it means
+Detalle	Details
+Periodo: {0} a {1} · {2} · Generado {3}	Period: {0} to {1} · {2} · Generated {3}
+Sin registros en el periodo	No records in the period
+Se muestran {0} de {1} registros.	Showing {0} of {1} records.
+Formato no válido. Usa csv, xlsx o pdf	Invalid format. Use csv, xlsx or pdf
+Comprobante de reservación\n	Reservation receipt\n
+Folio {0}\n{1}	Reservation no. {0}\n{1}
+Desglose	Breakdown
+Pagos	Payments
+Penalización aplicada: {0}	Penalty applied: {0}
+Cargos durante la estancia	Charges during the stay
+Sin pagos registrados	No payments recorded
+Importe de la cuenta	Account amount
+Saldo a favor del huésped	Guest credit balance
+Saldo pendiente	Balance due
+Política aceptada (versión {0}): cancelación sin costo hasta {1} horas antes de la llegada.	Accepted policy (version {0}): free cancellation up to {1} hours before check-in.
+Documento informativo; no es un comprobante fiscal (CFDI).	Informational document; not a tax invoice (CFDI).
+Solicitud desde el portal	Request from the website
+Creada por el personal	Created by staff
+Excepción autorizada	Authorized exception
+Modificada: {0}	Changed: {0}
+No se confirmó dentro del plazo	Not confirmed in time
+Liberada automáticamente	Released automatically
+Cancelada por el huésped	Cancelled by the guest
+Desde el portal	From the website
+Anticipo verificado	Deposit verified
+Check-in en la habitación {0}{1}	Check-in in room {0}{1}
+Excepción autorizada: habitación en limpieza	Authorized exception: room being cleaned
+Salida anticipada	Early check-out
+Excepción autorizada: {0}	Authorized exception: {0}
+El huésped no se presentó	The guest didn't show up
+No se pudo generar el archivo	The file couldn't be generated
+Cliente eliminado #{0}	Deleted guest #{0}
+El RFC no es válido	The RFC (tax ID) is not valid
+{0} con saldo pendiente autorizado: {1}	{0} with authorized balance due: {1}
+{0} (desde {1})	{0} (from {1})
+{0} (hasta {1})	{0} (until {1})
+{0} adulto(s)	{0} adult(s)
+{0} adulto(s), {1} menor(es)	{0} adult(s), {1} child(ren)
+Notificación no encontrada	Notification not found
+Categoría de notificación inválida	Invalid notification category

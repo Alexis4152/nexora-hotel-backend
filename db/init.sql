@@ -1,0 +1,29 @@
+-- ============================================================
+-- Nexora Hotel - init.sql
+--
+-- En este proyecto el esquema NO se crea con este archivo: lo crea Flyway al arrancar el backend
+-- (src/main/resources/db/migration, V1 en adelante) y lo mantiene al día en cada despliegue. Por eso aquí
+-- NO hay tablas: si se crearan a mano, Flyway encontraría una base "que no es suya" y el backend no arrancaría.
+--
+-- Este script solo prepara lo que debe existir ANTES del primer arranque. Es idempotente.
+--
+-- En Coolify normalmente NO hace falta correrlo: el servicio de PostgreSQL ya crea la base y su usuario, y ese
+-- usuario puede crear la extensión (la migración V1 la pide). Úsalo si:
+--   * instalas PostgreSQL por tu cuenta, o
+--   * el usuario de la aplicación no es dueño de la base y V1 falla con "permission denied to create extension".
+--
+-- Uso (conectado a la base de la aplicación, con un usuario administrador):
+--   psql -U postgres -d nexora_hotel -f db/init.sql
+--
+-- Si la base todavía no existe, créala primero (no se puede hacer dentro de este script):
+--   psql -U postgres -c "CREATE DATABASE nexora_hotel ENCODING 'UTF8'"
+--
+-- Después del primer arranque:
+--   * Tablas, índices y catálogo de permisos: los crea Flyway (el log muestra "Migrating schema ... to version ...").
+--   * SUPER_ADMIN: lo crea el backend con APP_BOOTSTRAP_SUPER_ADMIN_EMAIL / _PASSWORD (bórralas después).
+--   * Hoteles: los da de alta el SUPER_ADMIN desde /plataforma. No hay datos de demostración en producción.
+-- ============================================================
+
+-- btree_gist: necesaria para la restricción que impide dos ocupaciones traslapadas de la misma habitación.
+-- (PostgreSQL 13+: extensión "de confianza", la puede crear el dueño de la base.)
+CREATE EXTENSION IF NOT EXISTS btree_gist;
