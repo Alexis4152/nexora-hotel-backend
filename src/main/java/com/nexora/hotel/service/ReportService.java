@@ -19,6 +19,7 @@ import com.nexora.hotel.tenant.HotelDirectory;
 import com.nexora.hotel.tenant.TenantContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -512,7 +513,7 @@ public class ReportService {
         }
         jdbc.query("""
                 SELECT p.kind, p.amount, p.completed_at, r.check_in FROM payments p JOIN reservations r ON r.id = p.reservation_id
-                WHERE p.hotel_id = ? AND p.status = 'COMPLETED' AND p.completed_at >= ? AND p.completed_at < ?""", rs -> {
+                WHERE p.hotel_id = ? AND p.status = 'COMPLETED' AND p.completed_at >= ? AND p.completed_at < ?""", (RowCallbackHandler) rs -> {
             LocalDate day = rs.getObject("completed_at", OffsetDateTime.class).atZoneSameInstant(c.zone).toLocalDate();
             BigDecimal amount = rs.getBigDecimal("amount");
             boolean inflow = "PAYMENT".equals(rs.getString("kind"));
@@ -527,7 +528,7 @@ public class ReportService {
         }, c.hotelId, c.start(), c.end());
         jdbc.query("""
                 SELECT r.check_in, r.check_out, r.nights, r.total FROM reservations r
-                WHERE r.hotel_id = ? AND r.status IN %s AND r.check_in <= ? AND r.check_out > ?""".formatted(SOLD), rs -> {
+                WHERE r.hotel_id = ? AND r.status IN %s AND r.check_in <= ? AND r.check_out > ?""".formatted(SOLD), (RowCallbackHandler) rs -> {
             BigDecimal perNight = rs.getBigDecimal("total").divide(BigDecimal.valueOf(rs.getInt("nights")), 6, RoundingMode.HALF_UP);
             LocalDate end = rs.getDate("check_out").toLocalDate();
             for (LocalDate d = rs.getDate("check_in").toLocalDate(); d.isBefore(end); d = d.plusDays(1)) {
@@ -539,7 +540,7 @@ public class ReportService {
         }, c.hotelId, c.f.to(), c.f.from());
         jdbc.query("""
                 SELECT ch.amount, ch.created_at FROM reservation_charges ch
-                WHERE ch.hotel_id = ? AND ch.voided_at IS NULL AND ch.created_at >= ? AND ch.created_at < ?""", rs -> {
+                WHERE ch.hotel_id = ? AND ch.voided_at IS NULL AND ch.created_at >= ? AND ch.created_at < ?""", (RowCallbackHandler) rs -> {
             BigDecimal[] v = days.get(rs.getObject("created_at", OffsetDateTime.class).atZoneSameInstant(c.zone).toLocalDate());
             if (v != null) {
                 v[3] = v[3].add(rs.getBigDecimal("amount"));
@@ -548,7 +549,7 @@ public class ReportService {
         jdbc.query("""
                 SELECT r.penalty_amount, coalesce(r.cancelled_at, r.no_show_at) AS at FROM reservations r
                 WHERE r.hotel_id = ? AND r.penalty_amount > 0 AND ((r.status = 'CANCELLED' AND r.cancelled_at >= ? AND r.cancelled_at < ?)
-                   OR (r.status = 'NO_SHOW' AND r.no_show_at >= ? AND r.no_show_at < ?))""", rs -> {
+                   OR (r.status = 'NO_SHOW' AND r.no_show_at >= ? AND r.no_show_at < ?))""", (RowCallbackHandler) rs -> {
             BigDecimal[] v = days.get(rs.getObject("at", OffsetDateTime.class).atZoneSameInstant(c.zone).toLocalDate());
             if (v != null) {
                 v[4] = v[4].add(rs.getBigDecimal("penalty_amount"));
@@ -833,7 +834,7 @@ public class ReportService {
             }
             jdbc.query("""
                     SELECT kind, amount, completed_at FROM payments
-                    WHERE hotel_id = ? AND status = 'COMPLETED' AND completed_at >= ? AND completed_at < ?""", rs -> {
+                    WHERE hotel_id = ? AND status = 'COMPLETED' AND completed_at >= ? AND completed_at < ?""", (RowCallbackHandler) rs -> {
                 LocalDate d = rs.getObject("completed_at", OffsetDateTime.class).atZoneSameInstant(zone).toLocalDate();
                 BigDecimal a = "PAYMENT".equals(rs.getString("kind")) ? rs.getBigDecimal("amount") : rs.getBigDecimal("amount").negate();
                 daily.computeIfPresent(d, (k, v) -> v.add(a));
