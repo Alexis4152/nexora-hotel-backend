@@ -2,6 +2,7 @@ package com.nexora.hotel;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpMethod;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -120,5 +121,68 @@ class StayOperationsIT extends OperationsTestSupport {
         assertThat(res.data().path("account").path("amountDue").decimalValue()).as("primera noche").isEqualByComparingTo("1000");
         assertThat(jdbc.queryForObject("SELECT count(*) FROM room_occupancies WHERE reservation_id = ?", Integer.class, id)).isZero();
         assertThat(post(s, desk, "/api/admin/reservations/" + id + "/no-show", Map.of()).status()).isEqualTo(400);
+    }
+
+    @Test
+    void roomListTellsWhoIsInEachRoomUntilWhenAndWhoComesNext() {
+        Setup s = setup(2);
+        String desk = receptionist(s);
+        // La 101 (primera en el orden del hotel) recibe las tres: una en casa, otra que llega el día que ésta sale, y una más.
+        long inHouse = id(booking(s, today(), today().plusDays(2), true));
+        assertThat(post(s, desk, "/api/admin/reservations/" + inHouse + "/check-in", checkIn(true, true)).status()).isEqualTo(200);
+        JsonNode next = booking(s, today().plusDays(2), today().plusDays(4), true);
+        booking(s, today().plusDays(6), today().plusDays(7), true);
+        long cancelled = id(booking(s, today().plusDays(4), today().plusDays(5), true));
+        assertThat(post(s, desk, "/api/admin/reservations/" + cancelled + "/cancel", Map.of("reason", "Cambio de planes")).status()).isEqualTo(200);
+
+        JsonNode rooms = get("/api/admin/rooms", desk, s.slug()).data();
+        JsonNode r101 = rooms.get(0);
+        assertThat(r101.path("number").asText()).isEqualTo("101");
+        assertThat(r101.path("status").asText()).isEqualTo("OCCUPIED");
+        assertThat(r101.path("currentStay").path("reservationId").asLong()).isEqualTo(inHouse);
+        assertThat(r101.path("currentStay").path("guestName").asText()).isEqualTo("María Núñez");
+        assertThat(r101.path("currentStay").path("checkOut").asText()).isEqualTo(today().plusDays(2).toString());
+        assertThat(r101.path("currentStay").path("guests").asInt()).isEqualTo(2);
+        assertThat(r101.path("nextArrival").path("folio").asText()).as("la más próxima, no la cancelada ni la posterior")
+                .isEqualTo(next.path("summary").path("folio").asText());
+        assertThat(r101.path("nextArrival").path("checkIn").asText()).isEqualTo(today().plusDays(2).toString());
+        JsonNode r102 = rooms.get(1);
+        assertThat(r102.path("currentStay").isMissingNode()).as("la 102 está vacía").isTrue();
+        assertThat(r102.path("nextArrival").isMissingNode()).isTrue();
+
+        // Limpieza ve las fechas (las necesita para saber cuál se desocupa), pero no quién es el huésped.
+        JsonNode forHousekeeping = get("/api/admin/rooms", userWith(s, "HOUSEKEEPING:VIEW"), s.slug()).data().get(0);
+        assertThat(forHousekeeping.path("currentStay").path("checkOut").asText()).isEqualTo(today().plusDays(2).toString());
+        assertThat(forHousekeeping.path("nextArrival").path("checkIn").asText()).isEqualTo(today().plusDays(2).toString());
+        assertThat(forHousekeeping.path("currentStay").path("guestName").isMissingNode()).isTrue();
+        assertThat(forHousekeeping.path("currentStay").path("folio").isMissingNode()).isTrue();
+        assertThat(forHousekeeping.path("currentStay").path("reservationId").isMissingNode()).isTrue();
+        assertThat(forHousekeeping.path("nextArrival").path("guestName").isMissingNode()).isTrue();
+    }
+
+    @Test
+    void aRoomWithAGuestInHouseOnlyLeavesOccupiedThroughCheckOut() {
+        Setup s = setup(1);
+        long roomId = s.roomIds().get(0);
+        String desk = receptionist(s);
+        long id = id(booking(s, today(), today().plusDays(1), true));
+        assertThat(post(s, desk, "/api/admin/reservations/" + id + "/check-in", checkIn(true, true)).status()).isEqualTo(200);
+        String status = "/api/admin/rooms/" + roomId + "/status";
+
+        // Ni limpieza ni el administrador la sacan de "Ocupada" a mano: sería saltarse el cobro y el cierre de la estancia.
+        for (String target : List.of("CLEANING", "AVAILABLE", "MAINTENANCE")) {
+            Res res = call(HttpMethod.PATCH, status, Map.of("status", target), s.token(), s.slug(), null);
+            assertThat(res.status()).as(target).isEqualTo(400);
+            assertThat(res.body().path("message").asText()).contains("huésped en casa");
+        }
+        assertThat(roomStatus(roomId)).isEqualTo("OCCUPIED");
+
+        openCash(s, desk, "0");
+        assertThat(pay(s, desk, id, "CASH", "1000.00", null, null).status()).isEqualTo(201);
+        assertThat(post(s, desk, "/api/admin/reservations/" + id + "/check-out", Map.of()).status()).isEqualTo(200);
+        assertThat(roomStatus(roomId)).as("el check-out sí la manda a limpieza").isEqualTo("CLEANING");
+        assertThat(call(HttpMethod.PATCH, status, Map.of("status", "AVAILABLE"), userWith(s, "HOUSEKEEPING:UPDATE"), s.slug(), null).status())
+                .as("ya sin huésped, limpieza la marca lista").isEqualTo(200);
+        assertThat(roomStatus(roomId)).isEqualTo("AVAILABLE");
     }
 }

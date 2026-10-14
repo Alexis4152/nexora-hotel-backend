@@ -195,6 +195,45 @@ class NotificationsIT extends OperationsTestSupport {
         assertThat(ready.path("link").asText()).isEqualTo("/panel/reservaciones?r=" + arrival);
     }
 
+    @Test
+    void checkOutTellsHousekeepingAndOnlyHousekeepingThatTheRoomNeedsCleaning() {
+        Setup s = setup(1);
+        long roomId = s.roomIds().get(0);
+        String desk = receptionist(s);
+        // Todo hotel nace con el rol Camarista: solo limpieza.
+        assertThat(jdbc.queryForList("""
+                SELECT p.code FROM roles r JOIN role_permissions rp ON rp.role_id = r.id JOIN permissions p ON p.id = rp.permission_id
+                WHERE r.hotel_id = ? AND r.code = 'HOUSEKEEPER' AND r.system ORDER BY 1""", String.class, s.hotel().id()))
+                .containsExactly("HOUSEKEEPING:UPDATE", "HOUSEKEEPING:VIEW");
+        String housekeeper = token(createUser(s.hotel(), "HOUSEKEEPER").getEmail(), s.slug());
+
+        long id = id(booking(s, today(), today().plusDays(1), true));
+        Map<String, Object> checkIn = Map.of("identityVerified", true, "acceptPendingBalance", true,
+                "guests", List.of(Map.of("fullName", "María Núñez", "minor", false, "idType", "INE", "idNumber", "NUMA800101")));
+        assertThat(post(s, desk, "/api/admin/reservations/" + id + "/check-in", checkIn).status()).isEqualTo(200);
+        openCash(s, desk, "0");
+        assertThat(pay(s, desk, id, "CASH", "1000.00", null, null).status()).isEqualTo(201);
+        assertThat(inbox(s, housekeeper)).as("mientras el huésped está en casa no hay nada que limpiar").isEmpty();
+        assertThat(post(s, desk, "/api/admin/reservations/" + id + "/check-out", Map.of()).status()).isEqualTo(200);
+
+        JsonNode notice = inbox(s, housekeeper).get(0);
+        assertThat(notice.path("type").asText()).isEqualTo("ROOM_TO_CLEAN");
+        assertThat(notice.path("params").path("room").asText()).isEqualTo("101");
+        assertThat(notice.path("params").path("arrivalToday").asText()).isEqualTo("false");
+        assertThat(notice.path("link").asText()).isEqualTo("/panel/habitaciones?tab=limpieza");
+        assertThat(notice.path("params").has("guest")).as("limpieza no recibe el nombre del huésped").isFalse();
+        // El mostrador registra las salidas: no necesita un aviso por cada una.
+        assertThat(types(inbox(s, s.token()))).doesNotContain("ROOM_TO_CLEAN");
+        assertThat(types(inbox(s, desk))).doesNotContain("ROOM_TO_CLEAN");
+
+        // La camarista la marca lista; no ve reservaciones ni puede tocar otra cosa.
+        assertThat(call(HttpMethod.PATCH, "/api/admin/rooms/" + roomId + "/status", Map.of("status", "AVAILABLE"), housekeeper, s.slug(), null).status())
+                .isEqualTo(200);
+        assertThat(get("/api/admin/reservations/board", housekeeper, s.slug()).status()).isEqualTo(403);
+        assertThat(call(HttpMethod.PATCH, "/api/admin/rooms/" + roomId + "/status", Map.of("status", "MAINTENANCE"), housekeeper, s.slug(), null).status())
+                .isEqualTo(403);
+    }
+
     /** Lee un evento SSE completo (hasta la línea en blanco); ignora los comentarios de latido. */
     private static Map<String, String> nextEvent(BufferedReader reader) {
         Map<String, String> event = new HashMap<>();

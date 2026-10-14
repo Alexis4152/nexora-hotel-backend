@@ -91,10 +91,22 @@ public final class InventoryDtos {
     public record StatusRequest(@NotNull RoomStatus status, @Size(max = 500) String notes) {
     }
 
+    /**
+     * @param currentStay quién la ocupa ahora y hasta cuándo (solo en el listado; null si está vacía)
+     * @param nextArrival la siguiente reservación de la habitación, de hoy en adelante (solo en el listado)
+     */
     public record RoomResponse(Long id, String number, String name, String floor, String description,
                                String internalNotes, RoomStatus status, boolean active, int sortOrder, long version,
                                Long roomTypeId, String roomTypeName, List<ImageResponse> images,
-                               List<BlockResponse> activeBlocks) {
+                               List<BlockResponse> activeBlocks, RoomStay currentStay, RoomStay nextArrival) {
+    }
+
+    /**
+     * Estancia ligada a una habitación. Las fechas las ve todo el que ve habitaciones (limpieza las necesita para
+     * saber cuál se desocupa); la reservación, el folio y el nombre del huésped solo con {@code RESERVATIONS:VIEW}.
+     */
+    public record RoomStay(Long reservationId, String folio, String guestName, LocalDate checkIn, LocalDate checkOut,
+                           int guests) {
     }
 
     public record BlockRequest(

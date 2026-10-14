@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RoleAdminServiceImpl implements RoleAdminService {
 
-    private static final Set<String> RESERVED_CODES = Set.of(Role.ADMIN, Role.RECEPTIONIST, Role.GUEST, Role.SUPER_ADMIN);
+    private static final Set<String> RESERVED_CODES = Set.of(Role.ADMIN, Role.RECEPTIONIST, Role.HOUSEKEEPER, Role.GUEST, Role.SUPER_ADMIN);
 
     private final RoleRepository roleRepository;
     private final PermissionRepository permissionRepository;

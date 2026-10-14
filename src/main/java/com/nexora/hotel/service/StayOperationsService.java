@@ -22,6 +22,8 @@ import com.nexora.hotel.exception.ConflictException;
 import com.nexora.hotel.repository.OccupancyRepository;
 import com.nexora.hotel.repository.ReservationGuestRepository;
 import com.nexora.hotel.repository.ReservationLedger;
+import com.nexora.hotel.notification.StaffNotificationType;
+import com.nexora.hotel.notification.StaffNotifier;
 import com.nexora.hotel.repository.RoomRepository;
 import com.nexora.hotel.security.AuthPrincipal;
 import com.nexora.hotel.security.SecurityUtils;
@@ -62,6 +64,7 @@ public class StayOperationsService {
     private final ReservationGuestRepository guests;
     private final ReservationLedger ledger;
     private final AuditService auditService;
+    private final StaffNotifier staffNotifier;
     private final JdbcTemplate jdbc;
     private final Clock clock;
 
@@ -232,6 +235,15 @@ public class StayOperationsService {
         Room locked = rooms.findByIdForUpdate(room.getId()).orElseThrow();
         if (locked.getOperationalStatus() == RoomStatus.OCCUPIED) {
             setRoomStatus(locked, RoomStatus.CLEANING, "Check-out " + r.getFolio(), actor.userId());
+            // A quien limpia: ya puede entrar. Si otra reservación llega hoy a esa habitación, es la que urge.
+            Integer arrivals = jdbc.queryForObject("""
+                    SELECT count(*) FROM reservations n JOIN reservation_rooms rr ON rr.reservation_id = n.id
+                    WHERE rr.room_id = ? AND n.hotel_id = ? AND n.check_in = ? AND n.status IN ('CONFIRMED','PENDING','PENDING_PAYMENT')""",
+                    Integer.class, locked.getId(), hotelId, today);
+            staffNotifier.notify(StaffNotifier.Notice.of(StaffNotificationType.ROOM_TO_CLEAN, "ROOM_TO_CLEAN:" + r.getId())
+                    .param("room", locked.getNumber()).param("roomType", locked.getRoomType().getName())
+                    .param("arrivalToday", arrivals != null && arrivals > 0)
+                    .link("/panel/habitaciones?tab=limpieza").related("Room", locked.getId()));
         }
         String note = (early ? "Salida anticipada" : "Check-out")
                 + (withBalance ? " con saldo pendiente autorizado: " + req.reason().trim() : "");

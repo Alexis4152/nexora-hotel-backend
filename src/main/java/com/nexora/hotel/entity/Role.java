@@ -35,6 +35,7 @@ public class Role extends AuditableEntity {
     public static final String SUPER_ADMIN = "SUPER_ADMIN";
     public static final String ADMIN = "ADMIN";
     public static final String RECEPTIONIST = "RECEPTIONIST";
+    public static final String HOUSEKEEPER = "HOUSEKEEPER";
     public static final String GUEST = "GUEST";
 
     @Id

@@ -138,7 +138,13 @@ public class HotelProvisioningServiceImpl implements HotelProvisioningService {
         return new ProvisionedHotelResponse(summary(hotel, 1), admin.getEmail(), mustChange ? password : null);
     }
 
-    /** Roles de sistema del hotel. ADMIN recibe todo el catálogo; RECEPTIONIST, el default documentado. */
+    /** Lo único que necesita quien limpia: ver el tablero y marcar habitaciones listas o por limpiar. */
+    private static final Set<String> HOUSEKEEPER_PERMISSIONS = Set.of("HOUSEKEEPING:VIEW", "HOUSEKEEPING:UPDATE");
+
+    /**
+     * Roles de sistema del hotel. ADMIN recibe todo el catálogo; RECEPTIONIST, el default documentado; HOUSEKEEPER,
+     * solo limpieza (ve fechas de salida y llegada, nunca nombres de huéspedes ni dinero).
+     */
     private Role seedRoles() {
         List<Permission> catalog = permissionRepository.findAllByOrderBySortOrderAsc();
         Role admin = roleRepository.save(Role.builder().code(Role.ADMIN).name("Administrador")
@@ -146,6 +152,10 @@ public class HotelProvisioningServiceImpl implements HotelProvisioningService {
         roleRepository.save(Role.builder().code(Role.RECEPTIONIST).name("Recepcionista")
                 .description("Operación diaria de recepción").system(true)
                 .permissions(catalog.stream().filter(Permission::isDefaultReceptionist).collect(Collectors.toSet()))
+                .build());
+        roleRepository.save(Role.builder().code(Role.HOUSEKEEPER).name("Camarista")
+                .description("Limpieza de habitaciones").system(true)
+                .permissions(catalog.stream().filter(p -> HOUSEKEEPER_PERMISSIONS.contains(p.getCode())).collect(Collectors.toSet()))
                 .build());
         roleRepository.save(Role.builder().code(Role.GUEST).name("Huésped")
                 .description("Huésped con cuenta en el portal").system(true).build());

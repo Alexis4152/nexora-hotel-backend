@@ -104,7 +104,7 @@ public class StaffNotifier {
     public void notify(Notice notice) {
         long hotelId = TenantContext.requireHotelId();
         Long actorId = SecurityUtils.currentPrincipal().map(AuthPrincipal::userId).orElse(null);
-        List<Long> recipients = recipients(hotelId, notice.type().permission()).stream()
+        List<Long> recipients = recipients(hotelId, notice.type().permission(), notice.type().unlessPermission()).stream()
                 .filter(id -> !id.equals(actorId)).toList();
         if (recipients.isEmpty()) {
             return;
@@ -134,8 +134,8 @@ public class StaffNotifier {
                 Map.of("notification", d.view(), "unread", d.unread()))));
     }
 
-    /** Personal activo del hotel (no huéspedes) que tiene el permiso. */
-    private List<Long> recipients(long hotelId, String permission) {
+    /** Personal activo del hotel (no huéspedes) que tiene el permiso y no tiene el que lo excluye. */
+    private List<Long> recipients(long hotelId, String permission, String unlessPermission) {
         List<Long> staff = jdbc.queryForList("""
                 SELECT DISTINCT u.id FROM users u
                 JOIN user_roles ur ON ur.user_id = u.id
@@ -147,7 +147,8 @@ public class StaffNotifier {
         }
         List<Long> result = new ArrayList<>();
         for (User user : users.findAllById(staff)) {
-            if (permissionResolver.principalFor(user).hasPermission(permission)) {
+            AuthPrincipal principal = permissionResolver.principalFor(user);
+            if (principal.hasPermission(permission) && (unlessPermission == null || !principal.hasPermission(unlessPermission))) {
                 result.add(user.getId());
             }
         }

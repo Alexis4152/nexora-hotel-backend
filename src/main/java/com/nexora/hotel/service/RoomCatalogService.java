@@ -11,6 +11,7 @@ import com.nexora.hotel.dto.catalog.InventoryDtos.ImageResponse;
 import com.nexora.hotel.dto.catalog.InventoryDtos.PublicRoomType;
 import com.nexora.hotel.dto.catalog.InventoryDtos.RoomRequest;
 import com.nexora.hotel.dto.catalog.InventoryDtos.RoomResponse;
+import com.nexora.hotel.dto.catalog.InventoryDtos.RoomStay;
 import com.nexora.hotel.dto.catalog.InventoryDtos.RoomTypeRequest;
 import com.nexora.hotel.dto.catalog.InventoryDtos.RoomTypeResponse;
 import com.nexora.hotel.dto.catalog.InventoryDtos.StatusRequest;
@@ -42,6 +43,7 @@ import com.nexora.hotel.tenant.TenantContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -207,7 +209,31 @@ public class RoomCatalogService {
                 .filter(m -> m.getStatus() == MaintenanceStatus.OPEN && m.getEndsOn().isAfter(today()))
                 .collect(Collectors.groupingBy(MaintenanceRecord::getRoomId,
                         Collectors.mapping(RoomCatalogService::toDto, Collectors.toList())));
-        return rooms.stream().map(r -> toDto(r, images("ROOM", r.getId()), blocks.getOrDefault(r.getId(), List.of()))).toList();
+        Map<Long, RoomStay> current = new HashMap<>();
+        Map<Long, RoomStay> next = new HashMap<>();
+        loadStays(current, next);
+        return rooms.stream().map(r -> toDto(r, images("ROOM", r.getId()), blocks.getOrDefault(r.getId(), List.of()),
+                current.get(r.getId()), next.get(r.getId()))).toList();
+    }
+
+    /**
+     * Por habitación: el huésped en casa y la siguiente llegada (de hoy en adelante). Una sola consulta para todo
+     * el hotel, ordenada por llegada: la primera fila de cada habitación es la más próxima.
+     */
+    private void loadStays(Map<Long, RoomStay> current, Map<Long, RoomStay> next) {
+        boolean names = SecurityUtils.requirePrincipal().hasPermission("RESERVATIONS:VIEW");
+        jdbc.query("""
+                SELECT rr.room_id, r.id, r.folio, r.contact_name, r.check_in, r.check_out, r.adults + r.children AS guests,
+                       r.status = 'IN_HOUSE' AS in_house
+                FROM reservations r JOIN reservation_rooms rr ON rr.reservation_id = r.id
+                WHERE r.hotel_id = ? AND (r.status = 'IN_HOUSE'
+                      OR (r.status IN ('CONFIRMED','PENDING','PENDING_PAYMENT') AND r.check_in >= ?))
+                ORDER BY r.check_in, r.id""", (RowCallbackHandler) rs -> {
+            RoomStay stay = new RoomStay(names ? rs.getLong("id") : null, names ? rs.getString("folio") : null,
+                    names ? rs.getString("contact_name") : null, rs.getDate("check_in").toLocalDate(),
+                    rs.getDate("check_out").toLocalDate(), rs.getInt("guests"));
+            (rs.getBoolean("in_house") ? current : next).putIfAbsent(rs.getLong("room_id"), stay);
+        }, TenantContext.requireHotelId(), today());
     }
 
     @Transactional
@@ -264,6 +290,15 @@ public class RoomCatalogService {
         Room room = findRoom(id);
         if (r.status() == RoomStatus.OCCUPIED) {
             throw new BusinessException("El estado Ocupada se asigna automáticamente al registrar el check-in");
+        }
+        // Con un huésped en casa el estado no se cambia a mano: "En limpieza" es la CONSECUENCIA del check-out (que
+        // cobra el saldo y cierra la estancia), no un atajo para hacerlo. Pasar de Ocupada a limpieza a mano queda
+        // solo para corregir una habitación que se quedó marcada como ocupada sin nadie adentro.
+        Integer inHouse = jdbc.queryForObject("""
+                SELECT count(*) FROM reservations r JOIN reservation_rooms rr ON rr.reservation_id = r.id
+                WHERE rr.room_id = ? AND r.hotel_id = ? AND r.status = 'IN_HOUSE'""", Integer.class, id, TenantContext.requireHotelId());
+        if (inHouse != null && inHouse > 0) {
+            throw new BusinessException("La habitación tiene un huésped en casa: registra su salida desde la reservación");
         }
         if (room.getOperationalStatus() == RoomStatus.OCCUPIED && r.status() != RoomStatus.CLEANING) {
             throw new BusinessException("Una habitación ocupada solo puede pasar a limpieza tras el check-out");
@@ -530,9 +565,14 @@ public class RoomCatalogService {
     }
 
     private static RoomResponse toDto(Room r, List<ImageResponse> images, List<BlockResponse> blocks) {
+        return toDto(r, images, blocks, null, null);
+    }
+
+    private static RoomResponse toDto(Room r, List<ImageResponse> images, List<BlockResponse> blocks, RoomStay current,
+                                      RoomStay next) {
         return new RoomResponse(r.getId(), r.getNumber(), r.getName(), r.getFloor(), r.getDescription(), r.getInternalNotes(),
                 r.getOperationalStatus(), r.isActive(), r.getSortOrder(), r.getVersion(), r.getRoomType().getId(),
-                r.getRoomType().getName(), images, blocks);
+                r.getRoomType().getName(), images, blocks, current, next);
     }
 
     private static BlockResponse toDto(MaintenanceRecord m) {
